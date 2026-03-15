@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  codecobra:
+    build: .
+    ports:
+      - "3000:80"
+    container_name: codecobra-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    
+    # Health check to ensure the application is running
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

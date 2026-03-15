@@ -12,12 +12,71 @@ CodeCobra is a modern, interactive Python learning platform built with React and
 - **Hint System**: Get helpful hints when you're stuck
 - **Responsive Design**: Works perfectly on desktop and mobile devices
 
-## 🚀 Getting Started
+## � Docker Hub Repository
+
+This application is available as a Docker image on Docker Hub:
+
+```bash
+docker pull mallik008/codecobra:latest
+```
+
+### Available Tags
+- `latest` - Latest stable version
+- `v1.0` - Version 1.0 release
+
+## �🚀 Quick Start with Docker
+
+### Using Docker (Recommended)
+
+```bash
+# Pull and run the latest version
+docker run -d -p 3000:80 --name codecobra mallik008/codecobra:latest
+
+# Access the application at http://localhost:3000
+```
+
+### Using Docker Compose
+
+Create a `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+services:
+  codecobra:
+    image: mallik008/codecobra:latest
+    ports:
+      - "3000:80"
+    container_name: codecobra-app
+    restart: unless-stopped
+```
+
+Then run:
+```bash
+docker-compose up -d
+```
+
+## 🐳 Building Docker Image Locally
+
+If you want to build the Docker image yourself:
+
+```bash
+# Clone the repository
+git clone https://github.com/Mallikarjun-P-23/CodeCobra.git
+cd CodeCobra
+
+# Build the Docker image
+docker build -t codecobra .
+
+# Run locally built image
+docker run -d -p 3000:80 --name codecobra-local codecobra
+```
+
+## 🛠️ Local Development
 
 ### Prerequisites
 
 Make sure you have the following installed:
-- **Node.js** (version 16 or higher)
+- **Node.js** (version 18 or higher)
 - **npm** or **yarn** package manager
 
 ### Installation Steps
@@ -92,6 +151,58 @@ This project is open source and available under the [MIT License](LICENSE).
 - Powered by Skulpt for in-browser Python execution
 - Styled with Tailwind CSS for modern UI
 - Background image from Vecteezy
+
+## 📁 Project Structure
+
+```
+CodeCobra/
+├── src/
+│   ├── components/
+│   │   ├── CodeEditor.jsx       # Python code editor component
+│   │   ├── PythonSkulptRunner.jsx # Python execution engine
+│   │   ├── LevelSelector.jsx    # Level selection interface
+│   │   ├── Header.jsx           # Application header
+│   │   ├── Navigation.jsx       # Navigation component
+│   │   └── Feedback.jsx         # User feedback component
+│   ├── data/
+│   │   └── CodeCobraLevels.js   # Learning level configurations
+│   ├── pages/
+│   │   ├── Home.jsx             # Home page
+│   │   ├── CodeCobraPage.jsx    # Main learning interface
+│   │   └── PyLingoPage.jsx      # Additional features
+│   └── assets/                  # Static assets
+├── public/                      # Public assets
+├── Dockerfile                   # Multi-stage Docker build
+├── nginx.conf                   # Nginx configuration for production
+├── docker-compose.yml           # Docker Compose setup
+├── .dockerignore               # Docker ignore file
+└── package.json                # Dependencies and scripts
+```
+
+## 🔧 Docker Configuration
+
+### Multi-stage Build
+The Dockerfile uses a multi-stage build process:
+1. **Build Stage**: Uses Node.js to build the React application
+2. **Production Stage**: Uses Nginx to serve the static files
+
+### Nginx Configuration
+- Optimized for Single Page Applications (SPA)
+- Client-side routing support
+- Static asset caching
+- Security headers
+- Gzip compression
+
+## 🚀 Production Deployment
+
+The containerized application is production-ready and can be deployed to:
+- **Cloud Platforms**: AWS, Azure, Google Cloud Platform
+- **Container Orchestration**: Kubernetes, Docker Swarm
+- **VPS**: Any server with Docker installed
+- **CI/CD**: Easily integrate with GitHub Actions, GitLab CI, etc.
+
+### Health Checks
+The Docker Compose configuration includes health checks to ensure the application is running properly.
 
 ---
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import LevelSelector from '../components/LevelSelector';
 import InstructionsPanel from '../components/InstructionsPanel';
@@ -120,15 +121,26 @@ const PyLingoPage = () => {
 
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <InstructionsPanel
-            currentLevelData={currentLevelData}
-            completedLevels={completedLevels}
-            showHint={showHint}
-            setShowHint={setShowHint}
-            feedback={feedback}
-          />
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <InstructionsPanel
+              currentLevelData={currentLevelData}
+              completedLevels={completedLevels}
+              showHint={showHint}
+              setShowHint={setShowHint}
+              feedback={feedback}
+            />
+          </motion.div>
 
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <CodeEditor
               userCode={userCode}
               setUserCode={setUserCode}
@@ -141,15 +153,21 @@ const PyLingoPage = () => {
               onError={setCodeError}
               dependencies={[feedback]}
             />
-          </div>
+          </motion.div>
         </div>
 
-        <Navigation
-          currentLevel={currentLevel}
-          levels={levels}
-          completedLevels={completedLevels}
-          handleLevelChange={handleLevelChange}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+        >
+          <Navigation
+            currentLevel={currentLevel}
+            levels={levels}
+            completedLevels={completedLevels}
+            handleLevelChange={handleLevelChange}
+          />
+        </motion.div>
       </main>
     </div>
   );
